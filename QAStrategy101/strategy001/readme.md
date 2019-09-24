@@ -4,7 +4,7 @@ King Keltner 策略是基于移动平均线创立的, 基本思想是 在由最�
 
 1. 计算中心价 MP = 最高价, 最低价, 收盘价三者平均后的40周期移动平均价
 
-MP = MA((high+low+close/3), 40)
+MP = MA((high+low+close)/3, 40)
 
 
 2. 计算真实价格区间 TrueRange
@@ -15,17 +15,17 @@ TR =  max( abs(high_t - low_t), abs(high_t- close_t-1), abs(low_t - close_t-1))
 
 upBand = MP + mu*MA(TR, 40)
 
-dnBand = MP + mu*MA(TR, 40)
+dnBand = MP - mu*MA(TR, 40)
 
 4. 计算平仓价格
 
-FP = MP = MA((high+low+close/3), 40)
+FP = MP = MA((high+low+close)/3, 40)
 
 5. 开平仓条件
 
 买入开仓 BUY_OPEN : 当前周期MP > 上一个周期的MP  AND 当前价格 > upBand
 
-卖出开仓 SELL_OPEN:  当前周期MP < 上一个周期的MP  AND 当前价格 < upBand
+卖出开仓 SELL_OPEN:  当前周期MP < 上一个周期的MP  AND 当前价格 < dnBand
 
 平仓 : 当前周期价格 下穿  平仓价格FP
 
